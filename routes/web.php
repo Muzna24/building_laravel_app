@@ -30,3 +30,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::view('grating','auth.grating');
 Route::get('/user/{id}', 'idLoginController@userLogin');
 Route::get('user','UsersController@export');
+Route::view('import-file', 'issues.excel_import');
+Route::post('issue/import', 'IssuesController@importExcelFile');

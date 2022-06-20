@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\IssuesImport;
 use App\Issue;
 use Illuminate\Http\Request;
 use App\Mail\IssueRequestSubmited;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Maatwebsite\Excel\Facades\Excel;
 
 class IssuesController extends Controller
 {
@@ -42,5 +44,14 @@ class IssuesController extends Controller
     public function list(){
         $data['users'] = User::all();
         return view('issues.listIssue', $data);
+    }
+
+    public function importExcelFile(Request $request){
+        // $request->validate([
+        //     'excelFile'=>'mimes:xlsx',
+
+        // ]);
+        Excel::import(new IssuesImport, $request->excelFile);
+        return "imported file successfully!";
     }
 }
