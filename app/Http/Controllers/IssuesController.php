@@ -10,6 +10,7 @@ use App\Mail\IssueRequestSubmited;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class IssuesController extends Controller
 {
@@ -52,6 +53,8 @@ class IssuesController extends Controller
 
         // ]);
         Excel::import(new IssuesImport, $request->excelFile);
-        return "imported file successfully!";
+        
+        Alert::success('File Importing', 'file imported successfully!');
+        return back();
     }
 }

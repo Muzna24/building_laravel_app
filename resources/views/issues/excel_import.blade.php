@@ -21,6 +21,6 @@
         <input type="file" name="excelFile" id="excelFile">
         <input type="submit" value="Submit">
     </form>
-    
+    @include('sweetalert::alert', ['cdn' => "https://cdn.jsdelivr.net/npm/sweetalert2@9"])
 </body>
 </html>
