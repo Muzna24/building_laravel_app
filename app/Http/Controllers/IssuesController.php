@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\IssuesImport;
+use App\User;
 use App\Issue;
 use Illuminate\Http\Request;
+use App\Imports\IssuesImport;
 use App\Mail\IssueRequestSubmited;
-use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Maatwebsite\Excel\Facades\Excel;
