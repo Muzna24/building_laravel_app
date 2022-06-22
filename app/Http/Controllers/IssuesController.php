@@ -48,10 +48,10 @@ class IssuesController extends Controller
     }
 
     public function importExcelFile(Request $request){
-        // $request->validate([
-        //     'excelFile'=>'mimes:xlsx',
+        $request->validate([
+             'excelFile'=>'mimes:xlsx',
 
-        // ]);
+        ]);
         Excel::import(new IssuesImport, $request->excelFile);
         
         Alert::success('File Importing', 'file imported successfully!');
