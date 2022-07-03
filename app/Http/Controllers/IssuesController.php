@@ -33,7 +33,7 @@ class IssuesController extends Controller
         $issue->user_id = Auth::user()->id;
         $issue->save();
 
-        \Mail::to($issue->email)->send(new IssueRequestSubmited($issue));
+        Mail::to($issue->email)->send(new IssueRequestSubmited($issue));
 
         return "Done";
     }
@@ -50,7 +50,6 @@ class IssuesController extends Controller
     public function importExcelFile(Request $request){
         $request->validate([
              'excelFile'=>'mimes:xlsx',
-
         ]);
         Excel::import(new IssuesImport, $request->excelFile);
         
