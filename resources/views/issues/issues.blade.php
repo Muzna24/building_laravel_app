@@ -11,7 +11,7 @@
     {{--forme--}}
     <div class="container">
       <div class="row pt-5">
-      <h1>{{ __('Add your issue: ') }}</h1>
+      <h1>{{ __('Add issue:') }}</h1>
       <form action="/issues/store" method="post" enctype="multiport/form-data">
         @csrf
       <div class="mb-3">

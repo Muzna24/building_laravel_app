@@ -11,7 +11,7 @@
     {{--forme--}}
     <div class="container">
       <div class="row pt-5">
-      <h1>{{ __('Add your issue: ') }}</h1>
+      <h1>{{ __('Edit your issue: ') }}</h1>
       <form action="/issues/update/{{ $issue->id }}" method="post" enctype="multiport/form-data">
         @csrf
       <div class="mb-3">
