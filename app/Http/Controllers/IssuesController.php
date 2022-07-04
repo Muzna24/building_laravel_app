@@ -29,7 +29,13 @@ class IssuesController extends Controller
         $issue->message = $request->message;
         $issue->building_number = $request->building_number;
         $issue->apartment_number = $request->apartment_number;
-        $issue->attachment = $request->attachment;
+        if($request->hasFile('attachment')){
+            $photo = $request->file('attachment');
+            $path = 'images/'.time().'.'.$photo->extention();
+            $photo->move(public_path('images/'), $path);
+            $issue->attachment = $photo;
+        }
+        //$issue->attachment = $request->attachment;
         $issue->user_id = Auth::user()->id;
         $issue->save();
 

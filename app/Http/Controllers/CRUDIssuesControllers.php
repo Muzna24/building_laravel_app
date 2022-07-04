@@ -2,10 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Issue;
 use Illuminate\Http\Request;
+use App\Mail\IssueRequestSubmited;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 
 class CRUDIssuesControllers extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -14,6 +23,8 @@ class CRUDIssuesControllers extends Controller
     public function index()
     {
         //
+        $data['issues'] = Issue::all();
+        return view('issues.index', $data);
     }
 
     /**
@@ -24,6 +35,7 @@ class CRUDIssuesControllers extends Controller
     public function create()
     {
         //
+        return view('issues.issues');
     }
 
     /**
@@ -34,7 +46,26 @@ class CRUDIssuesControllers extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $issue = new Issue();
+        $issue->name = $request->name;
+        $issue->email = $request->email;
+        $issue->phone = $request->phone;
+        $issue->message = $request->message;
+        $issue->building_number = $request->building_number;
+        $issue->apartment_number = $request->apartment_number;
+        if($request->hasFile('attachment')){
+            $photo = $request->file('attachment');
+            $file_name = 'images'.time().'.'.$photo->extension();
+            $photo->move(public_path('images'), $file_name);
+            $issue->attachment = $file_name;
+        }
+        //$issue->attachment = $request->attachment;
+        $issue->user_id = Auth::user()->id;
+        $issue->save();
+
+        Mail::to($issue->email)->send(new IssueRequestSubmited($issue));
+
+        return "Done";
     }
 
     /**
@@ -57,6 +88,8 @@ class CRUDIssuesControllers extends Controller
     public function edit($id)
     {
         //
+        $data['issue']= Issue::findOrFail($id);
+        return view('issues.edit', $data);
     }
 
     /**
@@ -68,7 +101,26 @@ class CRUDIssuesControllers extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $issue = Issue::findOrFail($id);
+        $issue->name = $request->name;
+        $issue->email = $request->email;
+        $issue->phone = $request->phone;
+        $issue->message = $request->message;
+        $issue->building_number = $request->building_number;
+        $issue->apartment_number = $request->apartment_number;
+        if($request->hasFile('attachment')){
+            $photo = $request->file('attachment');
+            $file_name = 'images'.time().'.'.$photo->extension();
+            $photo->move(public_path('images'), $file_name);
+            $issue->attachment = $file_name;
+        }
+        //$issue->attachment = $request->attachment;
+        $issue->user_id = Auth::user()->id;
+        $issue->save();
+
+        Mail::to($issue->email)->send(new IssueRequestSubmited($issue));
+
+        return "Done";
     }
 
     /**
@@ -80,5 +132,9 @@ class CRUDIssuesControllers extends Controller
     public function destroy($id)
     {
         //
+        $record = Issue::findOrFail($id);
+        $record->delete();
+
+        return back();
     }
 }

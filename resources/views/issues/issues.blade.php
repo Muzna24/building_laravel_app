@@ -11,38 +11,38 @@
     {{--forme--}}
     <div class="container">
       <div class="row pt-5">
-      <h1>Add your issue: </h1>
-      <form action="/issue/store" method="post" enctype="multiport/form-data">
+      <h1>{{ __('Add your issue: ') }}</h1>
+      <form action="/issues/store" method="post" enctype="multiport/form-data">
         @csrf
       <div class="mb-3">
-        <label for="name" class="form-label">Name</label>
+        <label for="name" class="form-label">{{__('Name')}}</label>
         <input type="text" class="form-control" id="name" name="name" require value="{{ Auth::User()->name }}">
       </div>
   <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Email address</label>
+    <label for="exampleInputEmail1" class="form-label">{{ __('Email') }}</label>
     <input type="email" class="form-control" id="email" aria-describedby="emailHelp" name="email" require value="{{ Auth::User()->email }}">
   </div>
   <div class="mb-3">
-    <label for="phone" class="form-label">phone</label>
+    <label for="phone" class="form-label">{{ __('phone') }}</label>
     <input type="phone" class="form-control" id="phone" name="phone" require>
   </div>
   <div class="mb-3">
-    <label for="message" class="form-label">Message</label>
+    <label for="message" class="form-label">{{ __('Message') }}</label>
     <input type="textarea" class="form-control" id="message" name="message" require>
   </div>
   <div class="mb-3">
-    <label for="building_number" class="form-label">Building No</label>
+    <label for="building_number" class="form-label">{{ __('Building No') }}</label>
     <input type="txt" class="form-control" id="building_number" name="building_number" require>
   </div>
   <div class="mb-3">
-    <label for="apartment_number" class="form-label">Apartment No</label>
+    <label for="apartment_number" class="form-label">{{ __('Apartment No') }}</label>
     <input type="text" class="form-control" id="apartment_number" name="apartment_number" require>
   </div>
   <div class="mb-3">
-  <label for="formFile" class="form-label">Add attachment</label>
+  <label for="formFile" class="form-label">{{ __('Add attachment') }}</label>
   <input class="form-control" type="file" id="formFile" name= "attachment">
 </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
 </form>
       </div>
     </div>
