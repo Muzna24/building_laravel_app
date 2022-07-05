@@ -41,4 +41,7 @@ Route::prefix('issues')->group(function () {
     Route::post('/store', 'CRUDIssuesControllers@store');
 });
 
+//API testing
+Route::get('data/{id}', 'APIController@getData');
+
 
