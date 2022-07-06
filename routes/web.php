@@ -44,4 +44,8 @@ Route::prefix('issues')->group(function () {
 //API testing
 Route::get('data/{id}', 'APIController@getData');
 
+Route::get('checkout', 'OrderController@checkout');
+Route::get('payment-success', 'OrderController@success');
+Route::get('payment-cancel', 'OrderController@cancel');
+
 
